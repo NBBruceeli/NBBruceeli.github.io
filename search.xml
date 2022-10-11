@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>Koa使用服务转发解决跨域</title>
+      <link href="/2022/10/11/koa%E8%B7%A8%E5%9F%9F/"/>
+      <url>/2022/10/11/koa%E8%B7%A8%E5%9F%9F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="跨域案例"><a href="#跨域案例" class="headerlink" title="跨域案例"></a>跨域案例</h1><h2 id="项目是前后端耦合的项目，前端react，后端node-koa，起服务的时候本地起了node服务，但是项目迭代需要做一个新的页面，公司后端给的接口是另一个服务器的，这时候要么后端处理跨域，后端处理不成功的话就可以用-·服务转发·-的方法"><a href="#项目是前后端耦合的项目，前端react，后端node-koa，起服务的时候本地起了node服务，但是项目迭代需要做一个新的页面，公司后端给的接口是另一个服务器的，这时候要么后端处理跨域，后端处理不成功的话就可以用-·服务转发·-的方法" class="headerlink" title="项目是前后端耦合的项目，前端react，后端node+koa，起服务的时候本地起了node服务，但是项目迭代需要做一个新的页面，公司后端给的接口是另一个服务器的，这时候要么后端处理跨域，后端处理不成功的话就可以用 ·服务转发· 的方法"></a>项目是前后端耦合的项目，前端react，后端node+koa，起服务的时候本地起了node服务，但是项目迭代需要做一个新的页面，公司后端给的接口是另一个服务器的，这时候要么后端处理跨域，后端处理不成功的话就可以用 ·服务转发· 的方法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install http-proxy-middleware  koa2-connect --save</span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例如新的请求连接为： https://api-blog.ljl-test.com/xxx/ttt/list?page=1&amp;pageSize=10</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> url = ctx.<span class="property">url</span>;</span><br><span class="line">  <span class="keyword">if</span>(url.<span class="title function_">startsWith</span>(<span class="string">&#x27;/xxx/ttt&#x27;</span>)) &#123;</span><br><span class="line">      ctx.<span class="property">respond</span> = <span class="literal">false</span></span><br><span class="line">      <span class="keyword">await</span> <span class="title function_">k2c</span>(</span><br><span class="line">          <span class="title function_">createProxyMiddleware</span>(&#123;</span><br><span class="line">              <span class="attr">target</span>: <span class="string">&#x27;https://api-blog.ljl-test.com&#x27;</span>,</span><br><span class="line">              <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">              <span class="attr">secure</span>: <span class="literal">false</span></span><br><span class="line">          &#125;),</span><br><span class="line">      )(ctx, next);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">next</span>();</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>·</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>node+koa学习完整</title>
       <link href="/2022/09/22/node+koa%E5%AD%A6%E4%B9%A0/"/>
       <url>/2022/09/22/node+koa%E5%AD%A6%E4%B9%A0/</url>
